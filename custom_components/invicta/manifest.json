@@ -1,0 +1,15 @@
+{
+  "domain": "invicta",
+  "name": "Invicta",
+  "config_flow": true,
+  "documentation": "https://github.com/docteurzoidberg/ha-invicta/blob/main/README.md",
+  "requirements": [
+    "aiohttp",
+    "pydantic"
+  ],
+  "codeowners": [
+    "@docteurzoidberg"
+  ],
+  "iot_class": "local_polling",
+  "loggers": []
+}

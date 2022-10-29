@@ -1,5 +1,5 @@
 {
-    "name": "Integration blueprint",
+    "name": "Invicta (Winet Based) Wifi Pellet Stove",
     "hacs": "1.6.0",
     "domains": [
         "binary_sensor",
