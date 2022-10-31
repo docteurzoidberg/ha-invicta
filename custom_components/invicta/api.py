@@ -150,6 +150,7 @@ class InvictaApiData:
             self._decode_alarms()
             self._decode_temperature_read()
             self._decode_temperature_set()
+            self._decode_power_set()
             self._decode_fan_speed()
 
     def _get_register_value(self, registerid: WinetRegister) -> int:
