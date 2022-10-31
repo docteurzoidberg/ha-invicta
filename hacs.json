@@ -4,7 +4,10 @@
     "domains": [
         "binary_sensor",
         "sensor",
-        "switch"
+        "switch",
+        "climate",
+        "number",
+        "fan"
     ],
     "homeassistant": "0.118.0"
 }
