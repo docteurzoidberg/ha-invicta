@@ -1,4 +1,4 @@
-# integration_blueprint
+# Invicta Integration
 
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
@@ -60,7 +60,7 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 [integration_invicta]: https://github.com/docteurzoidberg/ha-invicta
 [buymecoffee]: https://www.buymeacoffee.com/drzoid
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/y/docteurzoidberg/ha-invicta.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/y/docteurzoidberg/ha--invicta.svg?style=for-the-badge
 [commits]: https://github.com/docteurzoidberg/ha-invicta/commits/master
 [hacs]: https://github.com/custom-components/hacs
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
