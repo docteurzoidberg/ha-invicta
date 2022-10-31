@@ -7,7 +7,9 @@
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
 
-_Component to integrate with [integration_invicta][integration_invicta]._
+This component enable the control of Invicta Pellet Stoves by Home Assistant.
+
+Tested with the Invicta Fontica 8 pellet stove (not tested on others stoves but should work if the stove uses a Winet Control wifi module)
 
 **This component will set up the following platforms.**
 
