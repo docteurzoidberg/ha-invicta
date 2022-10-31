@@ -69,7 +69,7 @@ class InvictaDataUpdateCoordinator(DataUpdateCoordinator[InvictaApiData]):
             manufacturer="Invicta",
             model="Fontica 8",
             name=self.read_api.data.name,
-            identifiers={("Invicta", f"{self.read_api.data.productmodel}]")},
+            identifiers={("Invicta", f"{self.read_api.data.model}]")},
             sw_version="1.0",
             configuration_url=f"http://{self._api.stove_ip}/",
         )

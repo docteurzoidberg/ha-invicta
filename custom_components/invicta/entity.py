@@ -24,8 +24,6 @@ class InvictaEntity(CoordinatorEntity[InvictaDataUpdateCoordinator]):
         self._attr_name = f"Stove {description.name}"
 
         # no serial number. generate unique id ?
-        self._attr_unique_id = (
-            f"{description.key}_{coordinator.read_api.data.productmodel}"
-        )
+        self._attr_unique_id = f"{description.key}_{coordinator.read_api.data.model}"
         # Configure the Device Info
         self._attr_device_info = self.coordinator.device_info

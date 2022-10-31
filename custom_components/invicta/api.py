@@ -4,6 +4,7 @@ from asyncio import Task
 from enum import Enum
 import time
 import aiohttp
+from aiohttp import ClientOSError
 
 from custom_components.invicta.winet.model import WinetGetRegisterResult
 from custom_components.invicta.winet.winet import WinetAPILocal
@@ -265,6 +266,7 @@ class InvictaApiClient:
     failed_poll_attempts = 0
     is_sending = False
     is_polling_in_background = False
+    stove_ip = ""
 
     def __init__(self, session: aiohttp.ClientSession, host: str) -> None:
         """init"""
@@ -275,6 +277,7 @@ class InvictaApiClient:
         self._should_poll_in_background = False
         self._bg_task: Task | None = None
 
+        self.stove_ip = host
         self.is_polling_in_background = False
         self.is_sending = False
         self.failed_poll_attempts = 0

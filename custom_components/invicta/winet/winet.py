@@ -1,6 +1,7 @@
 """Winet-Control API"""
 from __future__ import annotations
-import logging as _log
+import logging
+
 from json import JSONDecodeError
 
 import aiohttp
@@ -16,6 +17,8 @@ from .const import (
     WinetRegisterKey,
     WinetRegisterCategory,
 )
+
+LOGGER = logging.getLogger(__package__)
 
 
 class WinetAPILocal:
@@ -51,35 +54,35 @@ class WinetAPILocal:
                 "Origin": f"http://{self._stove_ip}",
                 "Referer": f"http://{self._stove_ip}/management.html",
             }
-            _log.warning(f"Querying {url} with data={data}")
+            LOGGER.debug(f"Querying {url} with data={data}")
             try:
                 async with session.post(url, data=data, headers=headers) as response:
                     try:
                         if response.status != 200:
-                            _log.warning(f"Error accessing {url} - {response.status}")
+                            LOGGER.warning(f"Error accessing {url} - {response.status}")
                             raise ConnectionError(
                                 f"Communication error - Response status {response.status}"
                             )
                         try:
                             json_data = await response.json(content_type=None)
-                            _log.warning("Received: %s", json_data)
+                            LOGGER.debug("Received: %s", json_data)
 
                             if "result" in json_data:
                                 # handle an action's result
                                 if json_data["result"] is False:
-                                    _log.warning("Api result is False")
+                                    LOGGER.warning("Api result is False")
                             else:
                                 try:
                                     return WinetGetRegisterResult(**json_data)
                                 except Exception:
-                                    _log.warning("Error parsing poll data")
-                                    _log.warning(f"Received: {json_data}")
+                                    LOGGER.warning("Error parsing poll data")
+                                    LOGGER.debug(f"Received: {json_data}")
                             # TODO: what about model check exceptions ?
                         except JSONDecodeError:
-                            _log.warning("Error decoding JSON: [%s]", response.text)
+                            LOGGER.warning("Error decoding JSON: [%s]", response.text)
 
                     except ConnectionError as exc:
-                        _log.warning(f"Connection Error accessing {url}")
+                        LOGGER.warning(f"Connection Error accessing {url}")
                         raise ConnectionError(
                             "ConnectionError - host not found"
                         ) from exc
@@ -92,7 +95,7 @@ class WinetAPILocal:
             ):
                 raise ConnectionError()
             except Exception as unknown_error:
-                _log.error("Unhandled Exception %s", type(unknown_error))
+                LOGGER.error("Unhandled Exception %s", type(unknown_error))
 
     async def set_register(
         self, registerid: WinetRegister, value: int, key="002", memory=1
@@ -118,14 +121,14 @@ class WinetAPILocal:
                 "Origin": f"http://{self._stove_ip}",
                 "Referer": f"http://{self._stove_ip}/management.html",
             }
-            _log.debug(f"Posting to {url}, data={data}")
+            LOGGER.debug(f"Posting to {url}, data={data}")
             try:
                 async with session.post(url, data=data, headers=headers) as response:
                     try:
                         # TODO: log others error responses codes
                         if response.status != 200:
                             # Valid address - but poll endpoint not found
-                            _log.warning(f"Error accessing {url} - {response.status}")
+                            LOGGER.warning(f"Error accessing {url} - {response.status}")
                             raise ConnectionError(
                                 f"Error accessing {url} - {response.status}"
                             )
@@ -133,12 +136,12 @@ class WinetAPILocal:
                             # returns {'result': False} if failed (or True if success)
                             json_data = await response.json(content_type=None)
                             if json_data["result"] is not True:
-                                _log.warning("Received: %s", json_data)
+                                LOGGER.debug("Received: %s", json_data)
 
                         except JSONDecodeError:
-                            _log.warning("Error decoding JSON: [%s]", response.text)
+                            LOGGER.warning("Error decoding JSON: [%s]", response.text)
                     except ConnectionError as exc:
-                        _log.warning(f"Connection Error accessing {url}")
+                        LOGGER.warning(f"Connection Error accessing {url}")
                         raise ConnectionError(
                             "ConnectionError - host not found"
                         ) from exc
@@ -152,4 +155,4 @@ class WinetAPILocal:
             ) as exc:
                 raise ConnectionError() from exc
             except Exception as unknown_error:
-                _log.error("Unhandled Exception %s", type(unknown_error))
+                LOGGER.error("Unhandled Exception %s", type(unknown_error))
