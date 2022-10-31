@@ -4,5 +4,25 @@
     "python.pythonPath": "/usr/local/bin/python",
     "files.associations": {
         "*.yaml": "home-assistant"
-    }
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#c4cac3",
+        "activityBar.background": "#c4cac3",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#707dcf",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#15202b99",
+        "sash.hoverBorder": "#c4cac3",
+        "statusBar.background": "#aab2a8",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#909a8d",
+        "statusBarItem.remoteBackground": "#aab2a8",
+        "statusBarItem.remoteForeground": "#15202b",
+        "titleBar.activeBackground": "#aab2a8",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#aab2a899",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.remoteColor": "#aab2a8"
 }

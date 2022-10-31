@@ -2,11 +2,10 @@
     "config": {
         "step": {
             "user": {
-                "title": "Blueprint",
+                "title": "Invicta",
                 "description": "Si vous avez besoin d'aide pour la configuration, regardez ici: https://github.com/custom-components/integration_blueprint",
                 "data": {
-                    "username": "Identifiant",
-                    "password": "Mot de Passe"
+                    "host": "Addresse ip du poele"
                 }
             }
         },

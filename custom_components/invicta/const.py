@@ -1,24 +1,33 @@
-"""Constants for integration_blueprint."""
+"""Constants for the Invicta integration."""
+from __future__ import annotations
+import logging
+from homeassistant.const import (
+    Platform,
+)
+
 # Base component constants
-NAME = "Integration blueprint"
-DOMAIN = "integration_blueprint"
+NAME = "Invicta Integration"
+DOMAIN = "invicta"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "0.0.1"
-ATTRIBUTION = "Data provided by http://jsonplaceholder.typicode.com/"
-ISSUE_URL = "https://github.com/custom-components/integration_blueprint/issues"
+VERSION = "1.0.0"
+ISSUE_URL = "https://github.com/docteurzoidberg/ha-invicta/issues"
+
+LOGGER = logging.getLogger(__package__)
 
 # Icons
-ICON = "mdi:format-quote-close"
+ICON = "mdi:fire"
 
 # Device classes
 BINARY_SENSOR_DEVICE_CLASS = "connectivity"
 
 # Platforms
-BINARY_SENSOR = "binary_sensor"
-SENSOR = "sensor"
-SWITCH = "switch"
-PLATFORMS = [BINARY_SENSOR, SENSOR, SWITCH]
-
+PLATFORMS = [
+    Platform.BINARY_SENSOR,
+    Platform.CLIMATE,
+    Platform.NUMBER,
+    Platform.SENSOR,
+    Platform.SWITCH,
+]
 
 # Configuration and options
 CONF_ENABLED = "enabled"
@@ -26,6 +35,10 @@ CONF_HOST = "host"
 
 # Defaults
 DEFAULT_NAME = DOMAIN
+DEFAULT_THERMOSTAT_TEMP = 21
+
+MIN_THERMOSTAT_TEMP = 15
+MAX_THERMOSTAT_TEMP = 25
 
 
 STARTUP_MESSAGE = f"""

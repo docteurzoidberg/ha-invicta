@@ -1,33 +1,31 @@
-"""BlueprintEntity class"""
+"""Platform for shared base classes for sensors."""
+from __future__ import annotations
+
+from homeassistant.helpers.entity import EntityDescription
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, NAME, VERSION, ATTRIBUTION
+from .coordinator import InvictaDataUpdateCoordinator
 
 
-class IntegrationBlueprintEntity(CoordinatorEntity):
-    def __init__(self, coordinator, config_entry):
-        super().__init__(coordinator)
-        self.config_entry = config_entry
+class InvictaEntity(CoordinatorEntity[InvictaDataUpdateCoordinator]):
+    """Define a generic class for Invicta entities."""
 
-    @property
-    def unique_id(self):
-        """Return a unique ID to use for this entity."""
-        return self.config_entry.entry_id
+    _attr_attribution = "Data provided by unpublished Winet Control API"
 
-    @property
-    def device_info(self):
-        return {
-            "identifiers": {(DOMAIN, self.unique_id)},
-            "name": NAME,
-            "model": VERSION,
-            "manufacturer": NAME,
-        }
+    def __init__(
+        self,
+        coordinator: InvictaDataUpdateCoordinator,
+        description: EntityDescription,
+    ) -> None:
+        """Class initializer."""
+        super().__init__(coordinator=coordinator)
+        self.entity_description = description
+        # Set the Display name the User will see
+        self._attr_name = f"Stove {description.name}"
 
-    @property
-    def extra_state_attributes(self):
-        """Return the state attributes."""
-        return {
-            "attribution": ATTRIBUTION,
-            "id": str(self.coordinator.data.get("id")),
-            "integration": DOMAIN,
-        }
+        # no serial number. generate unique id ?
+        self._attr_unique_id = (
+            f"{description.key}_{coordinator.read_api.data.productmodel}"
+        )
+        # Configure the Device Info
+        self._attr_device_info = self.coordinator.device_info
