@@ -1,6 +1,7 @@
 {
   "domain": "invicta",
   "name": "Invicta",
+  "integration_type": "device",
   "config_flow": true,
   "documentation": "https://github.com/docteurzoidberg/ha-invicta/blob/main/README.md",
   "requirements": [

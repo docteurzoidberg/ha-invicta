@@ -12,7 +12,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DOMAIN, LOGGER
+from .const import DOMAIN, LOGGER, MAX_POWER, MIN_POWER
 from .coordinator import InvictaDataUpdateCoordinator
 from .entity import InvictaEntity
 
@@ -40,8 +40,8 @@ async def async_setup_entry(
 class InvictaPowerControlEntity(InvictaEntity, NumberEntity):
     """Power control entity."""
 
-    _attr_native_max_value: float = 5
-    _attr_native_min_value: float = 1
+    _attr_native_max_value: float = MAX_POWER
+    _attr_native_min_value: float = MIN_POWER
     _attr_native_step: float = 1
     _attr_mode: NumberMode = NumberMode.SLIDER
 

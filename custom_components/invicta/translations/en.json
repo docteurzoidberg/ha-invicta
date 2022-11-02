@@ -1,12 +1,11 @@
 {
     "config": {
         "step": {
-            "user": {
-                "title": "Blueprint",
-                "description": "If you need help with the configuration have a look here: https://github.com/custom-components/integration_blueprint",
+            "manual_device_entry": {
+                "title": "Stove's IP Address",
+                "description": "If you need help with the configuration have a look here: https://github.com/docteurzoidberg/ha-invicta",
                 "data": {
-                    "username": "Username",
-                    "password": "Password"
+                    "host": "IP Address"
                 }
             }
         },
@@ -15,17 +14,6 @@
         },
         "abort": {
             "single_instance_allowed": "Only a single instance is allowed."
-        }
-    },
-    "options": {
-        "step": {
-            "user": {
-                "data": {
-                    "binary_sensor": "Binary sensor enabled",
-                    "sensor": "Sensor enabled",
-                    "switch": "Switch enabled"
-                }
-            }
         }
     }
 }

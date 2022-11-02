@@ -159,7 +159,7 @@ class InvictaApiData:
             if param[0] == registerid.value:
                 return param[1]
         LOGGER.error(f"RegisterId {registerid.value} not found in data")
-        print(self._rawdata)
+        LOGGER.debug(self._rawdata)
         raise Exception("RegisterId not found in data")
 
     def _decode_status(self) -> None:
@@ -212,7 +212,13 @@ class InvictaApiData:
         return self.status in [
             InvictaDeviceStatus.POWER_ON,
             InvictaDeviceStatus.WAIT_FOR_FLAME,
+            InvictaDeviceStatus.STANDBY,
         ]
+
+    @property
+    def is_heating(self) -> bool:
+        """Is heating ?"""
+        return self.status in [InvictaDeviceStatus.WORK]
 
     @property
     def error_offline(self) -> bool:
@@ -375,6 +381,13 @@ class InvictaApiClient:
         self.is_polling_in_background = False
         LOGGER.info("__background_poll:: Background polling disabled.")
 
+    async def set_fan_speed(self, value):
+        """Set air room vent fan speed"""
+        # ui min value is 0 (=50% fan) to 10 (=100fan)
+        value = clamp(int(value), 0, 10)
+        LOGGER.debug(f"Set fan speed to {value}")
+        await self._winetclient.set_register(WinetRegister.FAN_SPEED, value)
+
     async def set_power(self, value):
         """Send set register with key=002&memory=1&regId=51&value={value}"""
         # ui's min value is 2 and maximum is 5
@@ -386,7 +399,7 @@ class InvictaApiClient:
         """Send set register with key=002&memory=1&regId=50&value={value*2}"""
         # self defined min/max values
         value = clamp(float(value), 0.0, 25.0)
-        LOGGER.warn(f"Set temperature to {value}")
+        LOGGER.warning(f"Set temperature to {value}")
         await self._winetclient.set_register(
             WinetRegister.TEMPERATURE_SET, int(value * 2)
         )

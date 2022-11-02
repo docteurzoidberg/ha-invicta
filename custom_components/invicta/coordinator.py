@@ -27,7 +27,7 @@ class InvictaDataUpdateCoordinator(DataUpdateCoordinator[InvictaApiData]):
             hass,
             LOGGER,
             name=DOMAIN,
-            update_interval=timedelta(seconds=1),
+            update_interval=timedelta(seconds=2),
         )
         self._api = api
 

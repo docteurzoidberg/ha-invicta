@@ -36,10 +36,16 @@ class InvictaBinarySensorEntityDescription(
 
 INVICTA_BINARY_SENSORS: tuple[InvictaBinarySensorEntityDescription, ...] = (
     InvictaBinarySensorEntityDescription(
-        key="on_off",  # This is the sensor name
-        name="Flame",  # This is the human readable name
-        icon="mdi:fire",
+        key="on_off",
+        name="Power on",
+        icon="mdi:power",
         value_fn=lambda data: data.is_on,
+    ),
+    InvictaBinarySensorEntityDescription(
+        key="heating",
+        name="Heating",
+        icon="mdi:fire",
+        value_fn=lambda data: data.is_heating,
     ),
     InvictaBinarySensorEntityDescription(
         key="error_offline",
